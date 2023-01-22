@@ -12,7 +12,9 @@ export class TagsComponent {
   tags?:TagInterface[]
 
   constructor(foodService:FoodService){
-    this.tags = foodService.getAllTags()
+    foodService.getAllTags().subscribe((serverTags) =>{
+      this.tags = serverTags
+    })
   }
 
 }
