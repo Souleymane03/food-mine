@@ -1,5 +1,8 @@
 <app-search></app-search>
-<app-tags></app-tags>
+<app-tags *ngIf="foods && foods.length"></app-tags>
+<app-not-found
+[visible]="!foods || !foods.length"
+></app-not-found>
 <ul>
   <li *ngFor="let food of foods">
       <a routerLink="/food/{{food.id}}">
