@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FoodService } from 'src/app/services/food.service';
-import { TagInterface } from 'src/app/shared/types/tag.interface';
+import { TagModel } from 'src/app/shared/types/models/food_and_tag/tag.model';
 
 @Component({
   selector: 'app-tags',
@@ -9,7 +9,7 @@ import { TagInterface } from 'src/app/shared/types/tag.interface';
 })
 export class TagsComponent {
 
-  tags?:TagInterface[]
+  tags?:TagModel[]
 
   constructor(foodService:FoodService){
     foodService.getAllTags().subscribe((serverTags) =>{

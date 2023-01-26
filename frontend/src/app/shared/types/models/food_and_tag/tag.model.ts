@@ -1,4 +1,4 @@
-export class TagInterface{
+export class TagModel {
   name!:string
   count!:number
 }

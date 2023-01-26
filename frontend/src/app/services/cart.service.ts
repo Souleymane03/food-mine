@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { CartItemInterface } from '../shared/types/cart-item.interface';
-import { CartInterface } from '../shared/types/cart.interface';
-import { FoodInterface } from '../shared/types/food.interface';
+import { CartItemModel } from '../shared/types/models/cart/cart-item.model';
+import { CartModel } from '../shared/types/models/cart/cart.model';
+import { FoodModel } from '../shared/types/models/food_and_tag/food.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cart:CartInterface = this.getCartFromlocalStorage()
-  private cartSubject: BehaviorSubject<CartInterface> = new BehaviorSubject(this.cart)
+  private cart:CartModel = this.getCartFromlocalStorage()
+  private cartSubject: BehaviorSubject<CartModel> = new BehaviorSubject(this.cart)
 
   constructor() { }
 
-  addToCart(food:FoodInterface):void{
+  addToCart(food:FoodModel):void{
     let cartItem = this.cart.items.find(item => item.food.id === food.id)
     if(cartItem)
       return;
-    this.cart.items.push(new CartItemInterface(food))
+    this.cart.items.push(new CartItemModel(food))
     this.setCartToLocalStarage()
   }
   removeFromCart(foodId:string):void{
@@ -34,11 +34,11 @@ export class CartService {
   }
 
   clearart(){
-    this.cart = new CartInterface()
+    this.cart = new CartModel()
     this.setCartToLocalStarage()
   }
 
-  getCartObservable():Observable<CartInterface>{
+  getCartObservable():Observable<CartModel>{
     return this.cartSubject.asObservable()
   }
 
@@ -51,8 +51,8 @@ export class CartService {
     this.cartSubject.next(this.cart)
   }
 
-  private getCartFromlocalStorage():CartInterface{
+  private getCartFromlocalStorage():CartModel{
     const cartJson = localStorage.getItem("Cart")
-    return cartJson? JSON.parse(cartJson):new CartInterface()
+    return cartJson? JSON.parse(cartJson):new CartModel()
   }
 }

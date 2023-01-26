@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
-import { FoodInterface } from 'src/app/shared/types/food.interface';
+import { FoodModel } from 'src/app/shared/types/models/food_and_tag/food.model';
 
 @Component({
   selector: 'app-food-page',
@@ -11,7 +11,7 @@ import { FoodInterface } from 'src/app/shared/types/food.interface';
 })
 export class FoodPageComponent {
 
-  food!:FoodInterface
+  food!:FoodModel
 
   constructor(activatedRoute:ActivatedRoute,
     private foodService:FoodService,

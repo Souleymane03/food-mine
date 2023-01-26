@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { sample_foods, sample_tags } from 'src/data';
-import { FoodInterface } from '../shared/types/food.interface';
-import { TagInterface } from '../shared/types/tag.interface';
+import { FoodModel } from '../shared/types/models/food_and_tag/food.model';
+import { TagModel } from '../shared/types/models/food_and_tag/tag.model';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {
@@ -19,23 +18,23 @@ export class FoodService {
 
   constructor(private http:HttpClient) { }
 
-  getAll():Observable<FoodInterface[]>{
-    return this.http.get<FoodInterface[]>(FOODS_URL)
+  getAll():Observable<FoodModel[]>{
+    return this.http.get<FoodModel[]>(FOODS_URL)
   }
 
   getAllFoodsBySearchTerm(searchterm:string){
-    return this.http.get<FoodInterface[]>(FOODS_BY_SEARCH_URL+searchterm)
+    return this.http.get<FoodModel[]>(FOODS_BY_SEARCH_URL+searchterm)
   }
 
-  getAllTags():Observable<TagInterface[]>{
-    return this.http.get<TagInterface[]>(FOODS_TAGS_URL)
+  getAllTags():Observable<TagModel[]>{
+    return this.http.get<TagModel[]>(FOODS_TAGS_URL)
   }
 
-  getAllFoodsByTag(tag:string):Observable<FoodInterface[]>{
-    return this.http.get<FoodInterface[]>(FOODS_BY_TAG_URL+tag)
+  getAllFoodsByTag(tag:string):Observable<FoodModel[]>{
+    return this.http.get<FoodModel[]>(FOODS_BY_TAG_URL+tag)
   }
 
-  getFoodById(foodId:string):Observable<FoodInterface>{
-    return this.http.get<FoodInterface>(FOODS_BY_ID_URL+foodId)
+  getFoodById(foodId:string):Observable<FoodModel>{
+    return this.http.get<FoodModel>(FOODS_BY_ID_URL+foodId)
   }
 }

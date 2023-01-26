@@ -1,4 +1,4 @@
-export class FoodInterface{
+export class FoodModel {
   id!:string
   name!:string
   price!:number

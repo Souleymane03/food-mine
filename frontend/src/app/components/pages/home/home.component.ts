@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FoodService} from 'src/app/services/food.service';
-import {FoodInterface} from 'src/app/shared/types/food.interface';
+import {FoodModel} from 'src/app/shared/types/models/food_and_tag/food.model';
 import {Observable} from "rxjs";
 
 @Component({
@@ -11,10 +11,10 @@ import {Observable} from "rxjs";
 })
 export class HomeComponent implements OnInit {
 
-  foods: FoodInterface[] = []
+  foods: FoodModel[] = []
 
   constructor(private foodService: FoodService, activatedRoute: ActivatedRoute) {
-    let foodsObservable: Observable<FoodInterface[]>;
+    let foodsObservable: Observable<FoodModel[]>;
     activatedRoute.params.subscribe((params) => {
       if (params["searchTerm"])
         foodsObservable = this.foodService.getAllFoodsBySearchTerm(params["searchTerm"])
