@@ -1,0 +1,8 @@
+<input-container [label]="label">
+    <input [type]="type" [placeholder]="label" [formControl]="formControl" required>
+    <input-validation
+        [control]="control"
+        [showErrorsWhen] = "showErrorWhen"
+    >
+    </input-validation>
+</input-container>

@@ -1,34 +1,22 @@
 <div class="container">
-  <div class="details">
-    <app-title title="Login"></app-title>
-    <form [formGroup]="loginForm" (ngSubmit)="submit()">
-      <div class="input-container">
-        <label>Email</label>
-        <div><input type="email" placeholder="email" formControlName="email" required></div>
-        <div class="error-list" *ngIf="fc['email'].errors && isSubmited">
-          <div *ngIf="fc['email'].errors['required']">
-            Email should not be empty.
-          </div>
-          <div *ngIf="fc['email'].errors['email']">
-            Email format is invalid.
-          </div>
-        </div>
-      </div>
-      <div class="input-container">
-        <label>Password</label>
-        <div><input type="password" placeholder="password" formControlName="password" required></div>
-        <div class="error-list" *ngIf="fc['password'].errors && isSubmited">
-          <div *ngIf="fc['password'].errors['required']">
-            Password should not be empty.
-          </div>
-          <div *ngIf="fc['password'].errors['min']">
-            Password is too shord: min lenght 8.
-          </div>
-        </div>
-      </div>
-      <div class="button">
-        <button type="submit">Login</button>
-      </div>
-    </form>
-  </div>
+    <div class="details">
+        <app-title title="Login"></app-title>
+        <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <text-input
+                [control]="fc['email']"
+                [showErrorWhen]="isSubmited"
+                type="email"
+                label="Email"
+            >
+            </text-input>
+            <text-input
+                [control]="fc['password']"
+                [showErrorWhen]="isSubmited"
+                type="password"
+                label="Password"
+            >
+            </text-input>
+            <default-button text="Login"></default-button>
+        </form>
+    </div>
 </div>
