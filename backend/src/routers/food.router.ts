@@ -60,7 +60,7 @@ router.get("/tags", asyncHandler(async (req, res) => {
 
 router.get("/tags/:tag", asyncHandler(async (req, res) => {
     const tag = req.params.tag
-    const foods = await FoodModel.find({tags:tag})
+    const foods = tag === 'All' ? await FoodModel.find({}): await FoodModel.find({tags:tag})
     res.send(foods)
 }));
 

@@ -1,9 +1,12 @@
-import {API_MAIN} from "../constants/urls";
-import {sample_foods, sample_users} from "../data";
 import jwt from "jsonwebtoken";
 import {Router} from "express";
 import asyncHandler from "express-async-handler";
-import {UserModel} from "../models/user.model";
+import bcrypt from 'bcryptjs'
+
+
+import {UserInterface, UserModel} from "../models/user.model";
+import {HTTP_BAD_REQUEST} from "../constants/httpStatus";
+import {sample_users} from "../data";
 
 
 const router = Router()
@@ -27,6 +30,31 @@ router.post("/login", asyncHandler(async (req, res) => {
         res.send(generateTokenResponse((user)))
     else
         res.status(400).send("User email or password is not correct.")
+}));
+
+router.post("/register", asyncHandler(async (req, res) => {
+    const {email,name,address, password} = req.body;
+    const user = await UserModel.findOne({email});
+    if (user){
+        res.status(HTTP_BAD_REQUEST)
+            .send("User is already exist, please login!")
+        return;
+    }
+    const encryptedPassword = await bcrypt.hash(password,10);
+    const newUser: UserInterface = {
+        id:'',
+        name,
+        email:email.toLowerCase(),
+        password:encryptedPassword,
+        address,
+        isAdmin:false,
+        token:''
+    }
+
+    const dbUser = UserModel.create(newUser);
+
+    res.send(generateTokenResponse(dbUser))
+
 }));
 
 const generateTokenResponse = (user: any) => {
