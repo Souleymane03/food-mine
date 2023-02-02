@@ -55,6 +55,10 @@ export class UserService {
         window.location.reload()
     }
 
+    get currentUser(): UserModel{
+        return this.userSubject.value;
+    }
+
     private setUserToLocalStorage(user:UserModel){
         localStorage.setItem(USER_KEY,JSON.stringify(user))
     }
