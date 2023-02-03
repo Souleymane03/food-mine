@@ -1,4 +1,5 @@
 import {CartItemModel} from "../cart/cart-item.model";
+import {LatLng} from "leaflet";
 
 export class OrderModel{
     id!:number
@@ -6,6 +7,7 @@ export class OrderModel{
     totalPrice!:number
     name!:string
     address!:string
+    addessLatLng?:LatLng
     paymentId!:string
     createdAt!:string
     status!:string

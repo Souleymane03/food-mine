@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PasswordMatchValidator} from "../../shared/validators/password_match_validator";
-import {UserRegisterInterface} from "../../shared/types/interfaces/user/user-register.interface";
+import {PasswordMatchValidator} from "../../../shared/validators/password_match_validator";
+import {UserRegisterInterface} from "../../../shared/types/interfaces/user/user-register.interface";
 
 @Component({
   selector: 'app-register-page',
