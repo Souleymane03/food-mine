@@ -83,7 +83,7 @@ li .remove-button:hover{
 
 .checkout>div{
   font-size: 1.4rem;
-  margin: 1;
+  margin: 1rem;
   flex: 3;
   display: flex;
   flex-direction: column;
