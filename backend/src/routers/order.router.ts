@@ -31,5 +31,37 @@ router.post('/create',asyncHandler(async (req,res) => {
     res.send(newOrder)
 }));
 
+router.get("/newOrderForCurrentUser",asyncHandler(async (req,res) => {
+    const order = await getOrderForCurrentUser(req)
+
+    if(order) res.send(order);
+    else res.status(HTTP_BAD_REQUEST).send()
+}));
+
+router.post('/pay',asyncHandler(async (req:any,res) => {
+    const { paymentId } = req.body;
+    const order = await getOrderForCurrentUser(req);
+
+    if(!order)
+        res.status(HTTP_BAD_REQUEST).send();
+    else {
+        order.paymentId = paymentId;
+        order.status = OrderStatusEnum.PAYED;
+        await order.save();
+
+        res.send(order._id)
+    }
+
+}));
+
+router.get("/track/:id",asyncHandler(async (req:any,res) => {
+    const order = await OrderModel.findById(req.params.id);
+    res.send(order);
+}));
+
+
+async function getOrderForCurrentUser(req: any) {
+    return OrderModel.findOne({user: (req as any).user.id, status: OrderStatusEnum.NEW});
+}
 
 export default router;

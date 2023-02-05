@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, of, tap} from "rxjs";
 import {UserModel} from "../shared/types/models/user/user.model";
 import {UserLoginInterface} from "../shared/types/interfaces/user/user-login.interface";
 import {HttpClient} from "@angular/common/http";
@@ -15,7 +15,7 @@ export class UserService {
     private userSubject = new BehaviorSubject<UserModel>(new UserModel())
     public userObservable: Observable<UserModel>;
     constructor(private http:HttpClient,private toastrService:ToastrService) {
-        this.userObservable = this.userSubject.asObservable()
+        this.userObservable = of(this.getUserFromLocalStorage())
     }
 
     login(user:UserLoginInterface):Observable<UserModel>{
@@ -56,7 +56,7 @@ export class UserService {
     }
 
     get currentUser(): UserModel{
-        return this.userSubject.value;
+        return this.getUserFromLocalStorage();
     }
 
     private setUserToLocalStorage(user:UserModel){

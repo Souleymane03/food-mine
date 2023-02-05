@@ -33,7 +33,7 @@ export class CartService {
     this.setCartToLocalStarage()
   }
 
-  clearart(){
+  clearCart(){
     this.cart = new CartModel()
     this.setCartToLocalStarage()
   }
