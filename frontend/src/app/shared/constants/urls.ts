@@ -8,3 +8,5 @@ export const FOODS_BY_ID_URL = FOODS_URL + "/";
 
 export const USER_LOGIN_URL = BASE_URL + "/user/login"
 export const USER_REGISTER_URL = BASE_URL + "/user/register"
+export const ORDERS_URL = BASE_URL + "/orders"
+export const ORDER_CREATE_URL = ORDERS_URL + "/create"
